@@ -2,7 +2,7 @@ html {
     box-sizing: border-box;
     background: #ffc600;
     font-family: 'helvetica neue';
-    font-size: 20px;
+    font-size: 20px;    border: 1px solid red;
     font-weight: 200;
   }
   
