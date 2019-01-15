@@ -19,16 +19,40 @@ function findMatch(wordToMatch, cities){
     });
 }
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
 function displayMatches(){
     console.log(this.value);    //for testing
     //get search phrase
-    
+    const matchArr = findMatch(this.value, cities);
+    console.log(matchArr);
+    const html = matchArr.map(place => {
+        //highlight matching search phrase
+        const regex = new RegExp(this.value, 'gi');
+        const cityName = place.city.replace(regex, `<span class="h1">${this.value}</span>`);
+        const stateName = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
+        return `
+            <li>
+                <span class="name">${cityName}, ${stateName}</span>
+                <span class="population">${numberWithCommas(place.population)}</span>
+            </li>
+        `;
+    }).join(''); //make it return a big string instead of an multi-element array
+    suggestions.innerHTML = html; //display suggestion list
 }
 
 const searchInput = document.querySelector('.search');
 const suggestions = document.querySelector('.suggestions');
 
 searchInput.addEventListener('change', displayMatches);
+//keyup: when user releases a key, basically gets every input character entered
+searchInput.addEventListener('keyup', displayMatches);  
+
+
+
+
 
 
 
