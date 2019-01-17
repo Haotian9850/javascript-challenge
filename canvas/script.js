@@ -10,6 +10,7 @@ canvas.height = window.innerHeight;
 ctx.strokeStyle = '#BADA55';
 ctx.lineJoin = 'round'; //end of line
 ctx.lineCap = 'round';  //intersection of two lines
+ctx.lineWidth = 29;    //set drawing line width
 
 let isDrawing = false;  //flag of mouse clicking / holding
 let lastX = 0;
@@ -38,7 +39,11 @@ canvas.addEventListener('mousemove', draw);
 canvas.addEventListener('mousedown', (e) => {
     isDrawing = true;
     //prevent new line from starting from where the last line ends
-    [lastX, lastY] = e.offsetX, e.offsetY;
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+    //manipulating line color
+    ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+    ++ hue;
+    //line width can also be changed on-the-go
 });
 canvas.addEventListener('mouseup', () => isDrawing = false);
 canvas.addEventListener('mouseout', () => isDrawing = false);   //so that only holding the mouse will trigger event
