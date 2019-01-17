@@ -43,4 +43,19 @@ const people = [
   });
 
   console.log({comment});   //first comment satisdying condition in find
-  //simplified 
+  //simplified with arrow function
+  const commentSimplified = comments.find(comment => comment.id === 823423);
+
+  //.findIndex(): return index of element satisfying finding condition
+  const index = comments.findIndex(comment => comment.id === 823423);
+  console.log("index" + index);
+  //delete operation
+  comments.splice(index, 1);
+  console.log(comments);
+
+  const newComments = [
+      ...comments.slice(0, index),  //...spread elements in new array
+      ...comments.slice(index + 1)
+  ]
+  
+  console.table(newComments);
