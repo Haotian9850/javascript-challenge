@@ -38,13 +38,50 @@ function skip(){
     video.currentTime += parseFloat(this.dataset.skip);
 }
 
+function handleRangeUpdate(){
+    //control video sound and playback rate (intrinsic video properties)
+    video[this.name] = this.value;
+}
+
+function handleProgress(){
+    const percent = (video.currentTime / video.duration) * 100;
+    progressBar.style.flexBasis = `${percent}%`;    //run when video emits a timeUpdate / progress event
+}
+
+function scrub(e){
+    console.log(e);
+    const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;   //a percentage, need to be multiplied by video duration
+    video.currentTime = scrubTime;  //change video property
+}
+
 //add event listeners
 video.addEventListener('click', togglePlay);    //play / pause video when clicking on video
 video.addEventListener('play', updateButton);
 video.addEventListener('pause', updateButton);
+video.addEventListener('timeupdate', handleProgress);
 
 //toggle button
 toggle.addEventListener('click', togglePlay);
 
 //skip function
 skipButtons.forEach(button => button.addEventListener('click', skip));
+
+//control
+ranges.forEach(range => range.addEventListener('change', handleRangeUpdate));
+ranges.forEach(range => range.addEventListener('mousemove', handleRangeUpdate));
+
+//progress bar: listen click event on progress bar, move video to corresponding progress
+progressBar.addEventListener('click', scrub);
+
+//handle dragging
+let mouseDown = false;
+//dragging action
+progress.addEventListener('mouse', scrub);
+progress.addEventListener('mousemove', (e) => mouseDown && scrub(e));   //order matters!
+progress.addEventListener('mousedown', () => mouseDown = true);
+progress.addEventListener('mouseup', () => mouseDown = false);
+
+
+
+
+
