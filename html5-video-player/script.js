@@ -14,9 +14,37 @@ const ranges = player[0].querySelectorAll('.player__slider');
 function togglePlay(){
     //make video play or pause
     //video property: pause
+
     if(video.paused){
         video.play();
     }else{
         video.pause();
     }
 }
+
+function updateButton(){
+    console.log('button updated');
+    //changing button graphics
+    const icon = this.paused ? '►' : '❚ ❚';  //pause / play icons
+    console.log(this.paused);
+    console.log(icon);
+    toggle.textContent = icon;
+
+}
+
+function skip(){
+    //快进 / 快退按钮
+    console.log("this is skip function!");
+    video.currentTime += parseFloat(this.dataset.skip);
+}
+
+//add event listeners
+video.addEventListener('click', togglePlay);    //play / pause video when clicking on video
+video.addEventListener('play', updateButton);
+video.addEventListener('pause', updateButton);
+
+//toggle button
+toggle.addEventListener('click', togglePlay);
+
+//skip function
+skipButtons.forEach(button => button.addEventListener('click', skip));
