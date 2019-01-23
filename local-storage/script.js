@@ -1,7 +1,7 @@
 //use local storage to presever page information
 const addItems = document.querySelector('.add-items');
 const itemsList = document.querySelector('.plates');
-const items = [];
+const items = JSON.parse(localStorage.getItem('items')) || [];
 
 function addItem(e){
     console.log(e);
@@ -11,11 +11,14 @@ function addItem(e){
         text,   //ES6 shorthand 
         done: false
     }
+    items.push(item);
     populateList(items, itemsList);
+    //save to local storage! Need to stringify first!
+    localStorage.setItem('items', JSON.stringify(items));
     this.reset();   //clear all form entries
 
     console.log(item);
-    items.push(item);
+    
     console.table(items);
 }
 
@@ -31,3 +34,5 @@ function populateList(plates = [], platesList){
 }
 
 addItems.addEventListener('submit', addItem);
+
+populateList(items, itemsList);
