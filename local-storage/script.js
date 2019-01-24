@@ -33,6 +33,27 @@ function populateList(plates = [], platesList){
     }).join('');    //convert to just one string
 }
 
+function toggleDone(e){
+    console.log(e.target);
+    //check if target matches
+    const el = e.target;
+    if(!e.target.matches('input')){
+        return;
+    }
+    const index = el.dataset.index;
+    items[index].done = !items[index].done; //depends on implementation
+    //save into local storage
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+}
+
+
+
 addItems.addEventListener('submit', addItem);
 
 populateList(items, itemsList);
+
+
+//event delegation
+//listen on parent container instead of children (target)
+itemsList.addEventListener('click', toggleDone);
