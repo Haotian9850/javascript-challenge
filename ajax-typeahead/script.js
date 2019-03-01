@@ -35,8 +35,11 @@ function displayMatches(){
         const stateName = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
         return `
             <li>
+                
                 <span class="name">${cityName}, ${stateName}</span>
+                <a>Select</a>
                 <span class="population">${numberWithCommas(place.population)}</span>
+               
             </li>
         `;
     }).join(''); //make it return a big string instead of an multi-element array

@@ -9,6 +9,10 @@ html {
   body {
     margin: 0;
   }
+
+  p {
+    font-family: Helvetica;
+  }
   
   *, *:before, *:after {
     box-sizing: inherit;
@@ -32,7 +36,7 @@ html {
   header {
     text-align: center;
     height: 50vh;
-    background: url(http://wes.io/iEgP/wow-so-deep.jpg) bottom center no-repeat;
+    background: #696969;
     background-size: cover;
     display: flex;
     align-items: center;
