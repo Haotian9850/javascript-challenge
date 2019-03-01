@@ -16,6 +16,11 @@ html {
   h1 {
     margin-top: 0;
   }
+
+  p {
+    font-family: Helvetica;
+  }
+
   .site-wrap {
     max-width: 700px;
     margin: 100px auto;

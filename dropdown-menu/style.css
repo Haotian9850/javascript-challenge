@@ -16,6 +16,11 @@ html {
     margin: 0 auto !important;
     padding-top: .8em;
   }
+
+  p {
+    font-family: Helvetica;
+  }
+
   nav {
     position: relative;
     perspective: 600px;
